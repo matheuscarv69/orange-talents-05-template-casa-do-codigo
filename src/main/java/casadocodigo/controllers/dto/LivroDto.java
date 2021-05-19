@@ -14,11 +14,6 @@ public class LivroDto {
         this.titulo = livro.getTitulo();
     }
 
-    // Jackson apenas
-    @Deprecated
-    public LivroDto() {
-    }
-
     public Long getId() {
         return id;
     }
