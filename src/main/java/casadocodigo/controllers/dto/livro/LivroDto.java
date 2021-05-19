@@ -1,4 +1,4 @@
-package casadocodigo.controllers.dto;
+package casadocodigo.controllers.dto.livro;
 
 import casadocodigo.entities.Livro;
 import org.springframework.data.domain.Page;

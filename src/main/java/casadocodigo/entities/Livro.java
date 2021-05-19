@@ -1,7 +1,6 @@
 package casadocodigo.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.ISBN;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -92,5 +91,13 @@ public class Livro {
 
     public LocalDate getDataPublicacao() {
         return dataPublicacao;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 }

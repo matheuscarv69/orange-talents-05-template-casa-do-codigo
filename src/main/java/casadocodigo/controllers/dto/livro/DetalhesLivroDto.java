@@ -1,6 +1,8 @@
-package casadocodigo.controllers.dto;
+package casadocodigo.controllers.dto.livro;
 
+import casadocodigo.controllers.dto.autor.DetalhesAutorDto;
 import casadocodigo.entities.Livro;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
@@ -10,9 +12,14 @@ public class DetalhesLivroDto {
     private String resumo;
     private String sumario;
     private Double preco;
-    private Integer numeroPaginas;
     private String isbn;
+    private Integer numeroPaginas;
+
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataPublicacao;
+
+    private DetalhesAutorDto autor;
+    private String categoria;
 
     public DetalhesLivroDto(Livro livro) {
         this.titulo = livro.getTitulo();
@@ -22,6 +29,8 @@ public class DetalhesLivroDto {
         this.numeroPaginas = livro.getNumeroPaginas();
         this.isbn = livro.getIsbn();
         this.dataPublicacao = livro.getDataPublicacao();
+        this.autor = new DetalhesAutorDto(livro.getAutor());
+        this.categoria = livro.getCategoria().getNome();
     }
 
     public String getTitulo() {
@@ -50,5 +59,13 @@ public class DetalhesLivroDto {
 
     public LocalDate getDataPublicacao() {
         return dataPublicacao;
+    }
+
+    public DetalhesAutorDto getAutor() {
+        return autor;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
 }

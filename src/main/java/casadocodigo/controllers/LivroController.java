@@ -1,7 +1,7 @@
 package casadocodigo.controllers;
 
-import casadocodigo.controllers.dto.DetalhesLivroDto;
-import casadocodigo.controllers.dto.LivroDto;
+import casadocodigo.controllers.dto.livro.DetalhesLivroDto;
+import casadocodigo.controllers.dto.livro.LivroDto;
 import casadocodigo.controllers.form.LivroForm;
 import casadocodigo.entities.Livro;
 import casadocodigo.repositories.LivroRepository;
