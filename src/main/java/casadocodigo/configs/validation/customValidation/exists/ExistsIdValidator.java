@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsValidator implements ConstraintValidator<ExistsId, Object> {
+public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
 
     private String domainAttribute;
     private Class<?> aClass;

@@ -31,8 +31,8 @@ public class Livro {
     @Min(100)
     private Integer numeroPaginas;
 
-//  Comentado para facilitar os testes locais
-//  @ISBN(type = ISBN.Type.ISBN_13)
+    //  Comentado para facilitar os testes locais
+    //  @ISBN(type = ISBN.Type.ISBN_13)
     @Column(unique = true)
     private String isbn;
 
@@ -62,4 +62,11 @@ public class Livro {
     public Livro() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
 }

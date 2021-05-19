@@ -9,10 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.EntityManager;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class LivroForm {
@@ -29,10 +26,13 @@ public class LivroForm {
     private String sumario;
 
     @Min(20)
+    @Positive
     private Double preco;
 
     @Min(100)
+    @Positive
     private Integer numeroPaginas;
+
     //  Comentado para facilitar os testes locais
     //  @ISBN(type = ISBN.Type.ISBN_13)
     @UniqueValue(domainClass = Livro.class, fieldName = "isbn", message = "{field.validation.livro-isbn.duplicated}")
@@ -44,10 +44,12 @@ public class LivroForm {
 
     @NotNull
     @ExistsId(domainClass = Categoria.class, message = "{field.validation.categoria.not-exists}")
+    @Positive
     private Long idCategoria;
 
     @NotNull
     @ExistsId(domainClass = Autor.class, message = "{field.validation.autor.not-exists}")
+    @Positive
     private Long idAutor;
 
     public LivroForm(String titulo, String resumo, String sumario, Double preco, Integer numeroPaginas, String isbn, Long idCategoria, Long idAutor) {
