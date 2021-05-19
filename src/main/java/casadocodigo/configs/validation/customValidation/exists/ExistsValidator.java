@@ -1,8 +1,6 @@
 package casadocodigo.configs.validation.customValidation.exists;
 
-import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -10,7 +8,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsValidator implements ConstraintValidator<Exist, Object> {
+public class ExistsValidator implements ConstraintValidator<ExistsId, Object> {
 
     private String domainAttribute;
     private Class<?> aClass;
@@ -19,7 +17,7 @@ public class ExistsValidator implements ConstraintValidator<Exist, Object> {
     private EntityManager manager;
 
     @Override
-    public void initialize(Exist constraintAnnotation) {
+    public void initialize(ExistsId constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
         domainAttribute = constraintAnnotation.fieldName();
         aClass = constraintAnnotation.domainClass();

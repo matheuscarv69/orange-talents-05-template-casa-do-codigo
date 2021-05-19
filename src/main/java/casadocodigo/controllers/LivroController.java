@@ -2,8 +2,6 @@ package casadocodigo.controllers;
 
 import casadocodigo.controllers.form.LivroForm;
 import casadocodigo.entities.Livro;
-import casadocodigo.repositories.AutorRepository;
-import casadocodigo.repositories.CategoriaRepository;
 import casadocodigo.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
 @RestController
@@ -22,14 +21,11 @@ public class LivroController {
     private LivroRepository livroRepository;
 
     @Autowired
-    private AutorRepository autorRepository;
-
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+    EntityManager entityManager;
 
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid LivroForm livroForm) {
-        Livro livro = livroForm.converter(categoriaRepository, autorRepository);
+        Livro livro = livroForm.converter(entityManager);
 
         livroRepository.save(livro);
 

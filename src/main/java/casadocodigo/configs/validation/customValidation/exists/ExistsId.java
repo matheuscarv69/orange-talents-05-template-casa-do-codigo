@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = ExistsValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Exist {
+public @interface ExistsId {
 
     String message() default "{field.validation.exists}";
 

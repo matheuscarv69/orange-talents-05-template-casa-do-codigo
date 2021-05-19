@@ -1,17 +1,18 @@
 package casadocodigo.controllers.form;
 
-import casadocodigo.configs.validation.customValidation.exists.Exist;
+import casadocodigo.configs.validation.customValidation.exists.ExistsId;
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
 import casadocodigo.entities.Autor;
 import casadocodigo.entities.Categoria;
 import casadocodigo.entities.Livro;
-import casadocodigo.repositories.AutorRepository;
-import casadocodigo.repositories.CategoriaRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.*;
+import javax.persistence.EntityManager;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class LivroForm {
@@ -32,8 +33,8 @@ public class LivroForm {
 
     @Min(100)
     private Integer numeroPaginas;
-
-    //    @ISBN(type = ISBN.Type.ISBN_13)
+    //  Comentado para facilitar os testes locais
+    //  @ISBN(type = ISBN.Type.ISBN_13)
     @UniqueValue(domainClass = Livro.class, fieldName = "isbn", message = "{field.validation.livro-isbn.duplicated}")
     private String isbn;
 
@@ -42,31 +43,32 @@ public class LivroForm {
     private LocalDate dataPublicacao;
 
     @NotNull
-    @Exist(domainClass = Categoria.class, message = "{field.validation.categoria.not-exists}")
-    private Long categoria;
+    @ExistsId(domainClass = Categoria.class, message = "{field.validation.categoria.not-exists}")
+    private Long idCategoria;
 
     @NotNull
-    @Exist(domainClass = Autor.class, message = "{field.validation.autor.not-exists}")
-    private Long autor;
+    @ExistsId(domainClass = Autor.class, message = "{field.validation.autor.not-exists}")
+    private Long idAutor;
 
-    public LivroForm(String titulo, String resumo, String sumario, Double preco, Integer numeroPaginas, String isbn, Long categoria, Long autor) {
+    public LivroForm(String titulo, String resumo, String sumario, Double preco, Integer numeroPaginas, String isbn, Long idCategoria, Long idAutor) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
         this.preco = preco;
         this.numeroPaginas = numeroPaginas;
         this.isbn = isbn;
-        this.categoria = categoria;
-        this.autor = autor;
+        this.idCategoria = idCategoria;
+        this.idAutor = idAutor;
     }
 
+    // Setter para o Jackson conseguir pegar a data da requisição
     public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public Livro converter(CategoriaRepository categoriaRepository, AutorRepository autorRepository) {
-        Categoria categoria = categoriaRepository.findById(Long.valueOf(this.categoria)).get();
-        Autor autor = autorRepository.findById(Long.valueOf(this.autor)).get();
+    public Livro converter(EntityManager entityManager) {
+        Categoria categoria = entityManager.find(Categoria.class, idCategoria);
+        Autor autor = entityManager.find(Autor.class, idAutor);
         return new Livro(this.titulo, this.resumo, this.sumario, this.preco, this.numeroPaginas, this.isbn, this.dataPublicacao, categoria, autor);
     }
 }

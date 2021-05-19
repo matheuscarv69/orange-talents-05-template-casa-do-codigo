@@ -31,7 +31,8 @@ public class Livro {
     @Min(100)
     private Integer numeroPaginas;
 
-//    @ISBN(type = ISBN.Type.ISBN_13)
+//  Comentado para facilitar os testes locais
+//  @ISBN(type = ISBN.Type.ISBN_13)
     @Column(unique = true)
     private String isbn;
 
