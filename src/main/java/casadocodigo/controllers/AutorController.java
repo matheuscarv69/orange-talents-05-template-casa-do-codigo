@@ -1,6 +1,6 @@
 package casadocodigo.controllers;
 
-import casadocodigo.controllers.form.AutorForm;
+import casadocodigo.controllers.form.autor.AutorForm;
 import casadocodigo.entities.Autor;
 import casadocodigo.repositories.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

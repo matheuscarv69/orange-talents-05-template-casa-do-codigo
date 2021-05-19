@@ -1,4 +1,4 @@
-package casadocodigo.controllers.form;
+package casadocodigo.controllers.form.livro;
 
 import casadocodigo.configs.validation.customValidation.exists.ExistsId;
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;

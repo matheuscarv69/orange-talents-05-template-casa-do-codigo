@@ -1,4 +1,4 @@
-package casadocodigo.controllers.form;
+package casadocodigo.controllers.form.categoria;
 
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
 import casadocodigo.entities.Categoria;

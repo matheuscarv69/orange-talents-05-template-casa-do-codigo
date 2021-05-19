@@ -1,6 +1,6 @@
 package casadocodigo.controllers;
 
-import casadocodigo.controllers.form.CategoriaForm;
+import casadocodigo.controllers.form.categoria.CategoriaForm;
 import casadocodigo.entities.Categoria;
 import casadocodigo.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

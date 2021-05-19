@@ -2,7 +2,7 @@ package casadocodigo.controllers;
 
 import casadocodigo.controllers.dto.livro.DetalhesLivroDto;
 import casadocodigo.controllers.dto.livro.LivroDto;
-import casadocodigo.controllers.form.LivroForm;
+import casadocodigo.controllers.form.livro.LivroForm;
 import casadocodigo.entities.Livro;
 import casadocodigo.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;

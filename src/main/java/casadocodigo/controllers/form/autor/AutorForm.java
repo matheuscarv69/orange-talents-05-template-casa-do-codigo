@@ -1,4 +1,4 @@
-package casadocodigo.controllers.form;
+package casadocodigo.controllers.form.autor;
 
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
 import casadocodigo.entities.Autor;
