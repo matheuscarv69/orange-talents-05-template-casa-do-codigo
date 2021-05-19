@@ -1,5 +1,6 @@
 package casadocodigo.controllers;
 
+import casadocodigo.controllers.dto.DetalhesLivroDto;
 import casadocodigo.controllers.dto.LivroDto;
 import casadocodigo.controllers.form.LivroForm;
 import casadocodigo.entities.Livro;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livros")
@@ -39,6 +41,17 @@ public class LivroController {
         Page<Livro> livrosPage = livroRepository.findAll(pageable);
 
         return LivroDto.converter(livrosPage);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesLivroDto> detalhar(@PathVariable Long id) {
+        Optional<Livro> livro = livroRepository.findById(id);
+
+        if (livro.isPresent()) {
+            return ResponseEntity.ok(new DetalhesLivroDto(livro.get()));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 }
