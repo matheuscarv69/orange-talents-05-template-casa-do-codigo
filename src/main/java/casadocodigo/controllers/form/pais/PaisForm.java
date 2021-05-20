@@ -1,24 +1,24 @@
-package casadocodigo.controllers.form.categoria;
+package casadocodigo.controllers.form.pais;
 
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
-import casadocodigo.entities.Categoria;
+import casadocodigo.entities.Pais;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import javax.validation.constraints.NotEmpty;
 
-public class CategoriaForm {
+public class PaisForm {
 
     @NotEmpty
-    @UniqueValue(domainClass = Categoria.class, fieldName = "nome", message = "{field.validation.category.duplicated}")
+    @UniqueValue(domainClass = Pais.class, fieldName = "nome", message = "{field.validation.pais.duplicated}")
     private String nome;
 
     // Para o jackson conseguir parsear o json para entidade
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public CategoriaForm(String nome) {
+    public PaisForm(String nome) {
         this.nome = nome;
     }
 
-    public Categoria converter() {
-        return new Categoria(this.nome);
+    public Pais converter() {
+        return new Pais(this.nome);
     }
 }
