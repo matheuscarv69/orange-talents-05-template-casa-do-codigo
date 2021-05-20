@@ -1,5 +1,7 @@
 package casadocodigo.entities;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,10 @@ public class Estado {
 
     @Deprecated
     public Estado() {
+    }
+
+    public void perteceAoPais(Pais pais) {
+        Assert.isTrue(this.pais.equals(pais), "O Estado " + this.nome + " não pertece ao Pais informado");
     }
 
 }

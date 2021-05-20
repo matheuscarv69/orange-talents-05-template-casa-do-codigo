@@ -1,6 +1,7 @@
 package casadocodigo.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Pais {
@@ -21,5 +22,16 @@ public class Pais {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pais)) return false;
+        Pais pais = (Pais) o;
+        return Objects.equals(id, pais.id) && Objects.equals(nome, pais.nome);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome);
+    }
 }
