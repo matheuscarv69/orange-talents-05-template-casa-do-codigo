@@ -22,14 +22,18 @@ public class EstadoInPaisValidator implements ConstraintValidator<EstadoInPais, 
 
     @Override
     public boolean isValid(LocalidadeForm localidadeForm, ConstraintValidatorContext constraintValidatorContext) {
-        Query query = manager.createQuery("select e from Estado e where e.id = :pIdEstado and e.pais.id = :pIdPais");
-        query.setParameter("pIdEstado", localidadeForm.getIdEstado());
-        query.setParameter("pIdPais", localidadeForm.getIdPais());
+        if (localidadeForm.getIdEstado() != null) {
+            Query query = manager.createQuery("select e from Estado e where e.id = :pIdEstado and e.pais.id = :pIdPais");
+            query.setParameter("pIdEstado", localidadeForm.getIdEstado());
+            query.setParameter("pIdPais", localidadeForm.getIdPais());
 
-        List<?> list = query.getResultList();
+            List<?> list = query.getResultList();
 
-        boolean entityExists = !list.isEmpty();
+            boolean entityExists = !list.isEmpty();
 
-        return entityExists;
+            return entityExists;
+        }
+
+        return true;
     }
 }

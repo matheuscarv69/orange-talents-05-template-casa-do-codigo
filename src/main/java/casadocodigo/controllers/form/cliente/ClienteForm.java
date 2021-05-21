@@ -47,7 +47,16 @@ public class ClienteForm {
     @NotEmpty
     private String cep;
 
-    public ClienteForm(String nome, String sobrenome, String email, String documento, String endereco, String complemento, String cidade, LocalidadeForm localidade, String telefone, String cep) {
+    public ClienteForm(String nome,
+                       String sobrenome,
+                       String email,
+                       String documento,
+                       String endereco,
+                       String complemento,
+                       String cidade,
+                       LocalidadeForm localidade,
+                       String telefone,
+                       String cep) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
