@@ -1,7 +1,8 @@
 package casadocodigo.controllers.form.cliente;
 
-import casadocodigo.configs.validation.customValidation.exists.ExistsId;
+import casadocodigo.configs.validation.customValidation.estadoInPais.EstadoInPais;
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
+import casadocodigo.controllers.form.localidade.LocalidadeForm;
 import casadocodigo.entities.Cliente;
 import casadocodigo.entities.Estado;
 import casadocodigo.entities.Pais;
@@ -9,8 +10,6 @@ import casadocodigo.entities.Pais;
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 public class ClienteForm {
 
@@ -39,14 +38,8 @@ public class ClienteForm {
     @NotEmpty
     private String cidade;
 
-    @NotNull
-    @Positive
-    @ExistsId(domainClass = Pais.class, message = "{field.validation.pais.not-exists}")
-    private Long idPais;
-
-    @Positive
-    @ExistsId(domainClass = Estado.class, message = "{field.validation.estado.not-exists}")
-    private Long idEstado;
+    @EstadoInPais(message = "{field.validation.estado.not-exists-in-pais}")
+    private LocalidadeForm localidade;
 
     @NotEmpty
     private String telefone;
@@ -54,7 +47,7 @@ public class ClienteForm {
     @NotEmpty
     private String cep;
 
-    public ClienteForm(String nome, String sobrenome, String email, String documento, String endereco, String complemento, String cidade, Long idPais, Long idEstado, String telefone, String cep) {
+    public ClienteForm(String nome, String sobrenome, String email, String documento, String endereco, String complemento, String cidade, LocalidadeForm localidade, String telefone, String cep) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -62,14 +55,13 @@ public class ClienteForm {
         this.endereco = endereco;
         this.complemento = complemento;
         this.cidade = cidade;
-        this.idPais = idPais;
-        this.idEstado = idEstado;
+        this.localidade = localidade;
         this.telefone = telefone;
         this.cep = cep;
     }
 
     public Cliente converter(EntityManager entityManager) {
-        Pais pais = entityManager.find(Pais.class, idPais);
+        Pais pais = entityManager.find(Pais.class, localidade.getIdPais());
 
         Cliente cliente = new Cliente(this.nome,
                 this.sobrenome,
@@ -81,8 +73,8 @@ public class ClienteForm {
                 this.telefone,
                 this.cep);
 
-        if (idEstado != null) {
-            Estado estado = entityManager.find(Estado.class, idEstado);
+        if (localidade.getIdEstado() != null) {
+            Estado estado = entityManager.find(Estado.class, localidade.getIdEstado());
 
             estado.perteceAoPais(pais);
 
@@ -91,6 +83,4 @@ public class ClienteForm {
 
         return cliente;
     }
-
-
 }

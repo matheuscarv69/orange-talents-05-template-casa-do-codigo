@@ -26,6 +26,8 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm clienteForm) {
+        System.out.println(clienteForm.toString());
+
         Cliente cliente = clienteForm.converter(entityManager);
 
         clienteRepository.save(cliente);
