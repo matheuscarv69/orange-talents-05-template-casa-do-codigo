@@ -1,5 +1,6 @@
 package casadocodigo.controllers.form.cliente;
 
+import casadocodigo.configs.validation.customValidation.cpfOrCnpj.CpfOrCnpj;
 import casadocodigo.configs.validation.customValidation.estadoInPais.EstadoInPais;
 import casadocodigo.configs.validation.customValidation.uniqueValue.UniqueValue;
 import casadocodigo.controllers.form.localidade.LocalidadeForm;
@@ -25,7 +26,7 @@ public class ClienteForm {
     private String email;
 
     @NotEmpty
-    //    @CPF -> comentada para facilitar os testes
+    @CpfOrCnpj
     @UniqueValue(domainClass = Cliente.class, fieldName = "documento")
     private String documento;
 

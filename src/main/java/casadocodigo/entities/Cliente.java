@@ -1,5 +1,7 @@
 package casadocodigo.entities;
 
+import casadocodigo.configs.validation.customValidation.cpfOrCnpj.CpfOrCnpj;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -23,7 +25,7 @@ public class Cliente {
     private String email;
 
     @NotEmpty
-    //    @CPF -> comentada para facilitar os testes
+    @CpfOrCnpj
     @Column(unique = true)
     private String documento;
 
